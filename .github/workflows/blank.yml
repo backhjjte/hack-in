@@ -1,0 +1,16 @@
+STORAGE=metricsstorage$RANDOM
+
+az storage account create \
+    --name $STORAGE \
+    --sku Standard_LRS \
+    --location eastus2 \
+    --resource-group [sandbox resource group name]
+az vm create \
+    --name monitored-linux-vm \
+    --image UbuntuLTS \
+    --size Standard_B1s \
+    --location eastus2 \
+    --admin-username azureuser \
+    --boot-diagnostics-storage $STORAGE \
+    --resource-group [sandbox resource group name] \
+    --generate-ssh-keys
